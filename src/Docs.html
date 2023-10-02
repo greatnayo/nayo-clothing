@@ -1,0 +1,49 @@
+How to setup firebase for your project 
+
+1. Go to firebase console and create a project 
+2. Click on the web icon from your project to register your project
+3. Choose a name for the project  and click register, some codes will be generated for you 
+
+NOW 
+Create a utils file in your project to handle all the firebase connectivity 
+import { initializedApp} from 'firebase/app';
+import {signInWithRedirect, signInWithPopup, getAuth, GoogleAuthProvider} from 'firebase/auth';
+
+paste the code you copied from the firebase console
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDwsnuCA9uS1DVkr7TyHuwUe0VGhE070NU",
+    authDomain: "crwn-clothing-db-8cbca.firebaseapp.com",
+    projectId: "crwn-clothing-db-8cbca",
+    storageBucket: "crwn-clothing-db-8cbca.appspot.com",
+    messagingSenderId: "1054170091331",
+    appId: "1:1054170091331:web:b71d664ec68cb1fc62a9f6",
+  };
+  
+  // Initialize Firebase
+  const firebaseApp = initializeApp(firebaseConfig);
+
+  Next you neet to configure a GoogleAuthProvider
+  const  provider =  new GoogleAuthProvider();
+  provider.setParameters({
+    prompt: "select_acct"
+  });
+
+  export const auth = getAuth();
+  export const signInGoogleUser = ()=> signInWithPopup(auth, provider);
+
+
+
+  Go to the sign in file 
+
+  import {signInGoogleUser} from 'firebase.utils';
+
+  CREATE AND ASYNC FUNCTION TO CALL THE GOOGLE AUTH DATABASE
+  const logGoogleUser = async()=>{
+    const response = await signInGoogleUser();
+    console.log(response);
+  }
+
+
+
+
